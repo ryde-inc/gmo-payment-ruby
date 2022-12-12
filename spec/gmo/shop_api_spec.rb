@@ -1067,4 +1067,31 @@ describe "GMO::Payment::ShopAPI" do
     end
   end
 
+  describe "#search_card_detail" do
+    it "gets data about card used for given order", :vcr do
+      order_id = @order_id
+      result = @service.search_card_detail({
+        :order_id => order_id
+      })
+
+      result["CardNo"].nil?.should_not be_truthy
+      result["Brand"].nil?.should_not be_truthy
+      result["DomesticFlag"].nil?.should_not be_truthy
+      result["IssuerCode"].nil?.should_not be_truthy
+      result["DebitPrepaidFlag"].nil?.should_not be_truthy
+      result["DebitPrepaidIssuerName"].nil?.should_not be_truthy
+      result["ForwardFinal"].nil?.should_not be_truthy
+      result["Info1"].nil?.should_not be_truthy
+      result["Info2"].nil?.should_not be_truthy
+      result["Info3"].nil?.should_not be_truthy
+      result["Info4"].nil?.should_not be_truthy
+      result["Info5"].nil?.should_not be_truthy
+    end
+
+    it "got error if missing options", :vcr do
+      lambda {
+        result = @service.search_card_detail()
+      }.should raise_error("Required order_id were not provided.")
+    end
+  end
 end

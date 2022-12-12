@@ -651,6 +651,31 @@ module GMO
         post_request name, options
       end
 
+      ### @params ###
+      # OrderID
+      ### @return ###
+      # CardNo
+      # Brand
+      # DomesticFlag
+      # IssuerCode
+      # DebitPrepaidFlag
+      # DebitPrepaidIssuerName
+      # ForwardFinal
+      # Info1
+      # Info2
+      # Info3
+      # Info4
+      # Info5
+      # ショップID＋オーダーID指定
+      # 各パラメータはショップID＋オーダーID指定のみ設定してください。
+      # /payment/SearchCardDetail.idPass
+      def search_card_detail(options = {})
+        name = "SearchCardDetail.idPass"
+        required = [:order_id]
+        assert_required_options(required, options)
+        post_request name, options
+      end
+
       private
 
         def api_call(name, args = {}, verb = "post", options = {})
